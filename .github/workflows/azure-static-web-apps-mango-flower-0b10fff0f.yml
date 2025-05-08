@@ -44,6 +44,12 @@ jobs:
             return await core.getIDToken();
           result-encoding: string
           
+      - name: Create empty package.json if not exists
+        run: |
+          if [ ! -f package.json ]; then
+            echo '{"name":"html-css-site","version":"1.0.0","scripts":{"build":"echo No build needed"}}' > package.json
+          fi
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
